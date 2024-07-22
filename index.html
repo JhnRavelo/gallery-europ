@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css"
+        integrity="sha512-nNlU0WK2QfKsuEmdcTwkeh+lhGs6uyOxuUs+n+0oXSYDok5qy0EI0lt01ZynHq6+p/tbgpZ7P+yUb+r71wqdXg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <div class="modern-europ-realisation-gallery-container"></div>
+    <style>
+        .modern-europ-realisation-gallery-container {
+            columns: 4;
+            gap: 10px;
+        }
+
+        .modern-europ-realisation-gallery-container img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        /* --------------RESPONSIVE--------------- */
+        @media (max-width: 1040px) {
+            .modern-europ-realisation-gallery-container {
+                columns: 3;
+            }
+        }
+        @media (max-width: 560px) {
+            .modern-europ-realisation-gallery-container {
+                columns: 2;
+            }
+        }
+        /* --------------RESPONSIVE--------------- */
+    </style>
+
+    <script>
+        const lists = [
+            "0041_Europ'Alu _17-09-29.jpg",
+            "20140927_133041.jpg",
+            "4834.jpg",
+            "7.jpg",
+            "9058.jpg",
+            "apple_007.png",
+            "DSC07335.jpg",
+            "DSC6219.jpg",
+            "DSC_7934.jpg",
+            "DSC_8054.jpg",
+            "DSC_8065.jpg",
+            "DSC_8091.jpg",
+            "DSC_8384.jpg",
+            "DSC_84.jpg",
+            "DSC_8462.jpg",
+            "DSC_8535.jpg",
+            "School.jpeg",
+            "HDR_1.jpg",
+            "IMG_5370.jpg",
+            "IMG_5430.jpg",
+            "IMG_5467.jpg",
+            "IMG_8181 B.jpg",
+            "IMG_8213.jpg",
+            "La City Ivandra.jpg",
+            "naza electronics_.jpg",
+            "Pano4_Cit.png",
+            "pano_1.jpg",
+            "residence ambatobe.jpg",
+            "sodim cloison.jpg",
+            "_DSC0183.jpg",
+            "_DSC1533.jpg",
+            "_DSC4837.jpg",
+            "_DSC4950.jpg",
+            "_DSC4952.jpg",
+            "_MG_1346.jpg",
+            "_MG_1935.jpg",
+            "_MG_1970.jpg",
+            "_MG_2355.jpg",
+            "_MG_2388.jpg",
+            "_MG_2408.jpg",
+            "_MG_2410.jpg",
+            "_MG_2476.jpg",
+            "_MG_2544.jpg",
+            "_MG_2562.jpg",
+            "_MG_3886.jpg",
+            "_MG_3963.jpg",
+            "_MG_5603.jpg",
+            "_MG_6324.png",
+            "_MG_6585.jpg",
+            "_MG_7086.jpg",
+            "_MG_7098.jpg",
+            "_MG_7156.jpg",
+            "_MG_7168.jpg",
+            "_MG_7226.jpg",
+            "_MG_7243.jpg",
+            "_MG_7532.jpg",
+            "_MG_7541.jpg",
+            "_MG_7586.jpg",
+            "_MG_7653.jpg",
+            "_MG_7785.png",
+            "_MG_7790.png",
+            "_MG_7795.jpg",
+            "_MG_7796.jpg",
+            "_MG_7805.png",
+            "_MG_7819.jpg",
+            "_MG_7831.jpg",
+            "_MG_7888.jpg",
+            "_MG_7908.jpg",
+            "_MG_7914.png",
+            "_MG_7926.jpg",
+            "_MG_7960.jpg",
+            "_MG_7961.png",
+            "_MG_7996.png",
+            "_MG_8070.jpg",
+            "_MG_8080.jpg",
+            "_MG_8507.jpg",
+            "_MG_8635.jpg",
+            "_MG_8705.jpg",
+            "_MG_8727.jpg",
+            "_MG_8763.jpg",
+            "_MG_8966.jpg",
+            "_MG_9058.jpg",
+            "_MG_9298.jpg",
+            "_MG_9364.jpg",
+            "_MG_9431.jpg",
+            "_MG_9888.jpg",
+            "_MG_9914.jpg",
+        ];
+
+        const container = document.querySelector(
+            ".modern-europ-realisation-gallery-container"
+        );
+
+        lists.forEach((url) => {
+            const anchor = document.createElement('a');
+            anchor.href = "./photo/" + url;
+            anchor.setAttribute('data-fancybox', 'gallery');
+
+            const img = document.createElement("img");
+            img.src = "./photo/" + url;
+            anchor.appendChild(img);
+
+            container.appendChild(anchor);
+        });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+        integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js"
+        integrity="sha512-j7/1CJweOskkQiS5RD9W8zhEG9D9vpgByNGxPIqkO5KrXrwyDAroM9aQ9w8J7oRqwxGyz429hPVk/zR6IOMtSA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>
