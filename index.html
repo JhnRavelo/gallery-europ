@@ -11,11 +11,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css"
         integrity="sha512-nNlU0WK2QfKsuEmdcTwkeh+lhGs6uyOxuUs+n+0oXSYDok5qy0EI0lt01ZynHq6+p/tbgpZ7P+yUb+r71wqdXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <div class="modern-europ-realisation-gallery-container"></div>
+    <div class="modern-europ-realisation-gallery-line">
+        <div class="modern-europ-realisation-gallery-container"></div>
+    </div>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        .modern-europ-realisation-gallery-line {
+            overflow: hidden;
+            position: relative;
+        }
+
         .modern-europ-realisation-gallery-container {
-            columns: 4;
-            gap: 10px;
+            display: flex;
+            width: 98vw;
+            /* overflow: hidden; */
+            /* align-items: center; */
+            transition: 2s ease;
         }
 
         .modern-europ-realisation-gallery-container img {
@@ -23,17 +40,37 @@
             border-radius: 5px;
             margin-bottom: 5px;
         }
+
+        .modern-europ-realisation-gallery {
+            display: flex;
+            justify-content: center;
+        }
+
+        .modern-europ-realisation-gallery-content {
+            columns: 4;
+            gap: 10px;
+            min-width: 99vw;
+            padding: 10px;
+        }
+
+
+        /* --------------ANIMATION--------------- */
+
+        /* --------------ANIMATION--------------- */
+
         /* --------------RESPONSIVE--------------- */
         @media (max-width: 1040px) {
-            .modern-europ-realisation-gallery-container {
+            .modern-europ-realisation-gallery-content {
                 columns: 3;
             }
         }
+
         @media (max-width: 560px) {
-            .modern-europ-realisation-gallery-container {
+            .modern-europ-realisation-gallery-content {
                 columns: 2;
             }
         }
+
         /* --------------RESPONSIVE--------------- */
     </style>
 
@@ -48,11 +85,11 @@
             "DSC07335.jpg",
             "DSC6219.jpg",
             "DSC_7934.jpg",
-            "DSC_8054.jpg",
             "DSC_8065.jpg",
             "DSC_8091.jpg",
             "DSC_8384.jpg",
             "DSC_84.jpg",
+            "DSC_8054.jpg",
             "DSC_8462.jpg",
             "DSC_8535.jpg",
             "School.jpeg",
@@ -131,18 +168,50 @@
         const container = document.querySelector(
             ".modern-europ-realisation-gallery-container"
         );
+        let content = document.createElement("div");
+        content.className = "modern-europ-realisation-gallery-content";
+        let gallery = document.createElement("div");
+        gallery.className = "modern-europ-realisation-gallery";
+        const server = "./photo/";
+        let i = 1;
 
-        lists.forEach((url) => {
-            const anchor = document.createElement('a');
-            anchor.href = "./photo/" + url;
-            anchor.setAttribute('data-fancybox', 'gallery');
+        lists.forEach((url, index) => {
+            const anchor = document.createElement("a");
+            anchor.href = server + url;
+            anchor.setAttribute("data-fancybox", "gallery" + i.toString());
 
             const img = document.createElement("img");
-            img.src = "./photo/" + url;
-            anchor.appendChild(img);
+            img.src = server + url;
 
-            container.appendChild(anchor);
+            anchor.appendChild(img);
+            content.appendChild(anchor);
+            if (index > (i * 11)) {
+                gallery.appendChild(content);
+                container.appendChild(gallery);
+                content = document.createElement("div");
+                content.className = "modern-europ-realisation-gallery-content";
+                gallery = document.createElement("div");
+                gallery.className = "modern-europ-realisation-gallery";
+                i = i + 1;
+            }
         });
+        let curr = 0;
+        let slides = container.children.length;
+        const prev = () => {
+            curr = curr === 0 ? slides - 1 : curr - 1;
+            container.style.transform = `translateX(-${curr * (100 - 1)}vw)`;
+        };
+
+        const next = () => {
+            curr = curr === slides - 1 ? 0 : curr + 1;
+            container.style.transform = `translateX(-${curr * (100 - 1)}vw)`;
+        };
+        
+        setInterval(() => {
+            next()
+        }, 5000);
+
+
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
