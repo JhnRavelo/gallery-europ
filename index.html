@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="menu-europ-modern-content long menu-four">
-                    <a href="#id-presentation-europ-modern-container">
+                    <a href="https://europ-alu.com/page-preview/#id-presentation-europ-modern-container">
                         <div class="fill rose">
                             <span class="menu-europ-modern-big-span">
                                 EUROP'ALU UNE HISTOIRE D'INNOVATION
@@ -78,16 +78,16 @@
                 </div>
                 <div class="menu-europ-modern-content menu-five">
                     <a href="#modern-europ-nos-realisation">
-                    <div class="fill gris background-batiment">
-                        <div class="plus-svg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="29" viewBox="0 0 16 16">
-                                <path fill="#FA0644"
-                                    d="M8 7V3.5a.5.5 0 0 0-1 0V7H3.5a.5.5 0 0 0 0 1H7v3.5a.5.5 0 1 0 1 0V8h3.5a.5.5 0 1 0 0-1zm-.5 8a7.5 7.5 0 1 1 0-15a7.5 7.5 0 0 1 0 15" />
-                            </svg>
+                        <div class="fill gris background-batiment">
+                            <div class="plus-svg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="29" viewBox="0 0 16 16">
+                                    <path fill="#FA0644"
+                                        d="M8 7V3.5a.5.5 0 0 0-1 0V7H3.5a.5.5 0 0 0 0 1H7v3.5a.5.5 0 1 0 1 0V8h3.5a.5.5 0 1 0 0-1zm-.5 8a7.5 7.5 0 1 1 0-15a7.5 7.5 0 0 1 0 15" />
+                                </svg>
+                            </div>
+                            <span class="span-black"> Nos Réalisations </span>
                         </div>
-                        <span class="span-black"> Nos Réalisations </span>
-                    </div>
-                </a>
+                    </a>
                 </div>
                 <div class="menu-europ-modern-content menu-six">
                     <div class="fill violet">
@@ -147,24 +147,6 @@
     </div>
 
     <script>
-        let lastScrollTop = 0;
-        let whereScroll = "down";
-        window.addEventListener(
-            "scroll",
-            function () {
-                let scrollTop =
-                    window.pageYOffset || document.documentElement.scrollTop;
-
-                if (scrollTop > lastScrollTop) {
-                    whereScroll = "down";
-                } else {
-                    whereScroll = "up";
-                }
-                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-            },
-            false
-        );
-
         document.addEventListener("DOMContentLoaded", () => {
             const fillElement = document.querySelectorAll(".fill");
 
@@ -562,10 +544,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 70px;
+            margin-top: 30px;
             margin-bottom: 50px;
         }
-        
+
         .modern-europ-realisation-title-container h1 {
             font-size: 45px;
             color: #ea6a15;
@@ -772,6 +754,7 @@
         const container = document.querySelector(
             ".modern-europ-realisation-gallery-container"
         );
+        const buttonChevron = document.querySelector(".modern-europ-realisation-gallery-button-chevron");
         let content = document.createElement("div");
         content.className = "modern-europ-realisation-gallery-content";
         let gallery = document.createElement("div");
@@ -807,6 +790,7 @@
         });
         let curr = 0;
         let slides = container.children.length;
+
         const prev = () => {
             curr = curr === 0 ? slides - 1 : curr - 1;
             container.style.transform = `translateX(-${curr * (100 - 1)}vw)`;
@@ -820,6 +804,30 @@
         setInterval(() => {
             next();
         }, 15000);
+
+        const targetDiv = document.querySelector('.modern-europ-realisation-gallery-line');
+
+        function checkButtonVisibility() {
+            const rect = targetDiv.getBoundingClientRect();
+            const rectButton = buttonChevron.getBoundingClientRect();
+            console.log("GALLERY", rect);
+            console.log("BUTTON", rectButton);
+            const distance = window.innerWidth < 1041 ? 500 : 300;
+            console.log(distance);
+            const inViewport = rect.y < distance;
+
+            if (inViewport) {
+                buttonChevron.style.display = 'flex';
+            } else {
+                buttonChevron.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', checkButtonVisibility);
+        window.addEventListener('resize', checkButtonVisibility);
+
+        checkButtonVisibility();
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
         integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
