@@ -14,6 +14,22 @@
     <div class="modern-europ-realisation-gallery-line">
         <div class="modern-europ-realisation-gallery-container"></div>
     </div>
+    <div class="modern-europ-realisation-gallery-button-chevron">
+        <button onclick="prev()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+                class="modern-europ-realisation-gallery-chevron">
+                <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                    d="m15 18l-6-6l6-6" />
+            </svg>
+        </button>
+        <button onclick="next()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+                class="modern-europ-realisation-gallery-chevron">
+                <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                    d="m9 18l6-6l-6-6" />
+            </svg>
+        </button>
+    </div>
     <style>
         * {
             margin: 0;
@@ -30,8 +46,6 @@
         .modern-europ-realisation-gallery-container {
             display: flex;
             width: 98vw;
-            /* overflow: hidden; */
-            /* align-items: center; */
             transition: 2s ease;
         }
 
@@ -47,27 +61,76 @@
         }
 
         .modern-europ-realisation-gallery-content {
-            columns: 4;
+            columns: 3;
             gap: 10px;
             min-width: 99vw;
             padding: 10px;
         }
 
+        .modern-europ-realisation-gallery-button-chevron {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .modern-europ-realisation-gallery-button-chevron button {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+            border-radius: 50%;
+            background-color: transparent;
+            backdrop-filter: blur(10px);
+            box-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
+            cursor: pointer;
+            pointer-events: all;
+            border: #fff solid 2px;
+        }
+
+        .modern-europ-realisation-gallery-chevron {
+            font-size: 40px;
+            animation: whiteToBlackAnimation 1s ease-in-out, blackToWhiteAnimation 1s ease-in-out;
+            animation-iteration-count: infinite;
+        }
 
         /* --------------ANIMATION--------------- */
-
+        @keyframes whiteToBlackAnimation {
+            from {
+                color: #001;
+            }
+            to {
+                color: aliceblue;
+            }
+            
+        }
+        @keyframes blackToWhiteAnimation {
+            from {
+                color: aliceblue;
+            }
+            to {
+                color: #001;
+            }
+        }
         /* --------------ANIMATION--------------- */
 
         /* --------------RESPONSIVE--------------- */
-        @media (max-width: 1040px) {
-            .modern-europ-realisation-gallery-content {
-                columns: 3;
-            }
-        }
 
         @media (max-width: 560px) {
             .modern-europ-realisation-gallery-content {
                 columns: 2;
+            }
+            .modern-europ-realisation-gallery-button-chevron button {
+                width: 40px;
+                height: 40px;
+            }
+            .modern-europ-realisation-gallery-chevron {
+                width: 20px;
+                height: 20px;
             }
         }
 
@@ -76,20 +139,17 @@
 
     <script>
         const lists = [
-            "0041_Europ'Alu _17-09-29.jpg",
+            "La City Ivandra.jpg",
             "20140927_133041.jpg",
-            "4834.jpg",
+            "_MG_7541.jpg",
             "7.jpg",
             "9058.jpg",
             "apple_007.png",
             "DSC07335.jpg",
-            "DSC6219.jpg",
-            "DSC_7934.jpg",
             "DSC_8065.jpg",
             "DSC_8091.jpg",
             "DSC_8384.jpg",
             "DSC_84.jpg",
-            "DSC_8054.jpg",
             "DSC_8462.jpg",
             "DSC_8535.jpg",
             "School.jpeg",
@@ -99,7 +159,7 @@
             "IMG_5467.jpg",
             "IMG_8181 B.jpg",
             "IMG_8213.jpg",
-            "La City Ivandra.jpg",
+            "fenetre-ronde-aluminium-diam-100x100-cm.jpg",
             "naza electronics_.jpg",
             "Pano4_Cit.png",
             "pano_1.jpg",
@@ -109,7 +169,7 @@
             "_DSC1533.jpg",
             "_DSC4837.jpg",
             "_DSC4950.jpg",
-            "_DSC4952.jpg",
+            "_MG_8763.jpg",         
             "_MG_1346.jpg",
             "_MG_1935.jpg",
             "_MG_1970.jpg",
@@ -132,9 +192,9 @@
             "_MG_7226.jpg",
             "_MG_7243.jpg",
             "_MG_7532.jpg",
-            "_MG_7541.jpg",
-            "_MG_7586.jpg",
             "_MG_7653.jpg",
+            "_MG_7586.jpg",
+            "4834.jpg",
             "_MG_7785.png",
             "_MG_7790.png",
             "_MG_7795.jpg",
@@ -155,14 +215,18 @@
             "_MG_8635.jpg",
             "_MG_8705.jpg",
             "_MG_8727.jpg",
-            "_MG_8763.jpg",
+            "_DSC4952.jpg",
             "_MG_8966.jpg",
+            "DSC6219.jpg",
             "_MG_9058.jpg",
             "_MG_9298.jpg",
             "_MG_9364.jpg",
             "_MG_9431.jpg",
             "_MG_9888.jpg",
             "_MG_9914.jpg",
+            "DSC_8054.jpg",
+            "DSC_7934.jpg",
+            "0041_Europ'Alu _17-09-29.jpg",
         ];
 
         const container = document.querySelector(
@@ -174,6 +238,7 @@
         gallery.className = "modern-europ-realisation-gallery";
         const server = "./photo/";
         let i = 1;
+        const windowsWidth = window.innerWidth;
 
         lists.forEach((url, index) => {
             const anchor = document.createElement("a");
@@ -185,7 +250,12 @@
 
             anchor.appendChild(img);
             content.appendChild(anchor);
-            if (index > (i * 11)) {
+
+            if (
+                index >
+                i * (windowsWidth < 1040 ? 18 : windowsWidth < 560 ? 16 : 11) ||
+                index == lists.length - 1
+            ) {
                 gallery.appendChild(content);
                 container.appendChild(gallery);
                 content = document.createElement("div");
@@ -206,13 +276,10 @@
             curr = curr === slides - 1 ? 0 : curr + 1;
             container.style.transform = `translateX(-${curr * (100 - 1)}vw)`;
         };
-        
+
         setInterval(() => {
-            next()
-        }, 5000);
-
-
-
+            next();
+        }, 15000);
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
         integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
