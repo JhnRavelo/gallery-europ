@@ -146,7 +146,6 @@
             </button>
         </div>
     </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const fillElement = document.querySelectorAll(".fill");
@@ -579,10 +578,10 @@
         }
 
         .modern-europ-realisation-gallery-content {
-            columns: 3;
+            columns: 5;
             gap: 10px;
             min-width: 100vw;
-            padding: 10px 10px 10px 10px;
+            padding: 10px;
         }
 
         .modern-europ-realisation-gallery-button-chevron {
@@ -607,14 +606,14 @@
             border-radius: 50%;
             background-color: transparent;
             backdrop-filter: blur(10px);
-            box-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
+            box-shadow: rgb(255, 255, 255) 0px 3px 8px;
             cursor: pointer;
-            pointer-events: all;
-            border: #fff solid 2px;
+            pointer-events: all;         
+            border: #001 solid 3px;
         }
 
         .modern-europ-realisation-gallery-chevron {
-            font-size: 40px;
+            font-size: 60px;
             animation: whiteToBlackAnimation 1s ease-in-out,
                 blackToWhiteAnimation 1s ease-in-out;
             animation-iteration-count: infinite;
@@ -644,6 +643,12 @@
         /* --------------ANIMATION--------------- */
 
         /* --------------RESPONSIVE--------------- */
+
+        @media (max-width: 1040px) {
+            .modern-europ-realisation-gallery-content {
+                columns: 3;
+            }
+        }
 
         @media (max-width: 560px) {
             .modern-europ-realisation-gallery-content {
@@ -681,14 +686,15 @@
             "DSC_8535.jpg",
             "School.jpeg",
             "HDR_1.jpg",
+
             "IMG_5370.jpg",
             "IMG_5430.jpg",
             "IMG_5467.jpg",
+            "Pano4_Cit.png", 
             "IMG_8181-B.jpg",
-            "IMG_8213.jpg",
             "fenetre-ronde-aluminium-diam-100x100-cm.jpg",
             "naza-electronics_.jpg",
-            "Pano4_Cit.png",
+            "IMG_8213.jpg",
             "pano_1.jpg",
             "residence-ambatobe.jpg",
             "sodim-cloison.jpg",
@@ -696,6 +702,7 @@
             "DSC1533.jpg",
             "DSC4837.jpg",
             "DSC4950.jpg",
+
             "MG_8763.jpg",
             "MG_1346.jpg",
             "MG_1935.jpg",
@@ -768,9 +775,9 @@
         gallery.className = "modern-europ-realisation-gallery";
         const server = "http://europ-alu.com/wp-content/uploads/2024/07/";
         let i = 1;
-        const windowsWidth = window.innerWidth;
-
+        
         lists.forEach((url, index) => {
+            const windowsWidth = window.innerWidth;
             const anchor = document.createElement("a");
             anchor.href = server + url;
             anchor.setAttribute("data-fancybox", "gallery" + i.toString());
@@ -781,8 +788,8 @@
             content.appendChild(anchor);
 
             if (
-                index >
-                i * (windowsWidth < 1040 ? 18 : windowsWidth < 560 ? 16 : 11) ||
+                index + 1 >=
+                i * (windowsWidth < 560 ? 11 : windowsWidth < 1040 ? 16 : 15) ||
                 index == lists.length - 1
             ) {
                 gallery.appendChild(content);
@@ -820,20 +827,19 @@
             const rect = targetDiv.getBoundingClientRect();
             const distance = windowWidth < 1041 ? 500 : 300;
             const bottomDistance =
-            windowWidth < 430
-                ? -740 :
+            windowWidth < 441
+                ? -120 :
                 windowWidth < 541
-                    ? -1200
+                    ? -480
                         : windowWidth < 769
-                            ? -540
+                            ? -350
                             : windowWidth < 821
-                                ? -600
+                                ? -380
                                 : windowWidth < 1041
-                                    ? -760
-                                    : -1000;
+                                    ? -450
+                                    : -340;
             const inViewport = rect.y < distance;
             const notInBottom = rect.y > bottomDistance;
-
             if (inViewport && notInBottom) {
                 buttonChevron.style.display = "flex";
             } else {
