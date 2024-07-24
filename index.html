@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css"
         integrity="sha512-nNlU0WK2QfKsuEmdcTwkeh+lhGs6uyOxuUs+n+0oXSYDok5qy0EI0lt01ZynHq6+p/tbgpZ7P+yUb+r71wqdXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <div class="body-modern-europ">
         <div class="menu-modern-europ" id="id-menu-modern-europ">
             <div id="menu-europ-modern-container">
@@ -540,7 +541,6 @@
             scroll-behavior: smooth;
         }
 
-
         .modern-europ-realisation-title-container {
             display: flex;
             align-items: center;
@@ -552,7 +552,7 @@
         .modern-europ-realisation-title-container h1 {
             font-size: 45px;
             color: #ea6a15;
-            font-family: 'Lato', sans-serif;
+            font-family: "Lato", sans-serif;
         }
 
         .modern-europ-realisation-gallery-line {
@@ -615,7 +615,8 @@
 
         .modern-europ-realisation-gallery-chevron {
             font-size: 40px;
-            animation: whiteToBlackAnimation 1s ease-in-out, blackToWhiteAnimation 1s ease-in-out;
+            animation: whiteToBlackAnimation 1s ease-in-out,
+                blackToWhiteAnimation 1s ease-in-out;
             animation-iteration-count: infinite;
         }
 
@@ -628,7 +629,6 @@
             to {
                 color: aliceblue;
             }
-
         }
 
         @keyframes blackToWhiteAnimation {
@@ -759,7 +759,9 @@
         const container = document.querySelector(
             ".modern-europ-realisation-gallery-container"
         );
-        const buttonChevron = document.querySelector(".modern-europ-realisation-gallery-button-chevron");
+        const buttonChevron = document.querySelector(
+            ".modern-europ-realisation-gallery-button-chevron"
+        );
         let content = document.createElement("div");
         content.className = "modern-europ-realisation-gallery-content";
         let gallery = document.createElement("div");
@@ -797,38 +799,53 @@
 
         const prev = () => {
             curr = curr === 0 ? slides - 1 : curr - 1;
-            container.style.transform = `translateX(-${curr * (100)}vw)`;
+            container.style.transform = `translateX(-${curr * 100}vw)`;
         };
 
         const next = () => {
             curr = curr === slides - 1 ? 0 : curr + 1;
-            container.style.transform = `translateX(-${curr * (100)}vw)`;
+            container.style.transform = `translateX(-${curr * 100}vw)`;
         };
 
         setInterval(() => {
             next();
         }, 15000);
 
-        const targetDiv = document.querySelector('.modern-europ-realisation-gallery-line');
+        const targetDiv = document.querySelector(
+            ".modern-europ-realisation-gallery-line"
+        );
 
         function checkButtonVisibility() {
+            const windowWidth = window.innerWidth;
             const rect = targetDiv.getBoundingClientRect();
-            const distance = window.innerWidth < 1041 ? 500 : 300;
+            const distance = windowWidth < 1041 ? 500 : 300;
+            const bottomDistance =
+            windowWidth < 430
+                ? -740 :
+                windowWidth < 541
+                    ? -1200
+                        : windowWidth < 769
+                            ? -540
+                            : windowWidth < 821
+                                ? -600
+                                : windowWidth < 1041
+                                    ? -760
+                                    : -1000;
             const inViewport = rect.y < distance;
-            const notInBottom = rect.bottom > window.innerHeight;
+            const notInBottom = rect.y > bottomDistance;
+            console.log(rect.y, bottomDistance);
 
             if (inViewport && notInBottom) {
-                buttonChevron.style.display = 'flex';
+                buttonChevron.style.display = "flex";
             } else {
-                buttonChevron.style.display = 'none';
+                buttonChevron.style.display = "none";
             }
         }
 
-        window.addEventListener('scroll', checkButtonVisibility);
-        window.addEventListener('resize', checkButtonVisibility);
+        window.addEventListener("scroll", checkButtonVisibility);
+        window.addEventListener("resize", checkButtonVisibility);
 
         checkButtonVisibility();
-
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
         integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
